@@ -1,3 +1,21 @@
+const oldestPerson = maxBy(
+  [
+    { name: "jon", age: 29 },
+    { name: "peter", age: 30 },
+    { name: "andrey", age: 22 },
+  ],
+  (person) => person.age
+); // gives us { name: "peter", age: 30 }
+
+const youngestPerson = minBy(
+  [
+    { name: "jon", age: 29 },
+    { name: "peter", age: 30 },
+    { name: "andrey", age: 22 },
+  ],
+  (person) => person.age
+); 
+
 /**
  * Make sure to read the e17.md file!
  * For this exercise we want you to make custom `maxBy` and `minBy` methods. 
@@ -9,14 +27,40 @@
  */
 
 export function minBy(array, cb) {
-  // Your code goes here...
+	if (array.length === 0) {
+		return undefined;
+	}
+	let minValue = cb(array[0]);
+	let minElement = array[0];
 
+	for (let i = 0; i < array.length; i++) {
+		const currentValue = cb(array[i]);
+		if (currentValue < minValue) {
+			minValue = currentValue;
+			minElement = array[i];
+		}
+	}
+	return minElement;
 }
 
 export function maxBy(array, cb) {
-  // Your code goes here...
-
+	if (array.length === 0) {
+		return undefined;
+	}
+	let maxValue = cb(array[0]);
+	let maxElement = array[0];
+	for (let i = 0; i < array.length; i++) {
+		const currentValue = cb(array[i]);
+		if (currentValue > maxValue) {
+			maxValue = currentValue;
+			maxElement = array[i];
+		}
+	}
+	return maxElement;
 }
+
+console.log(oldestPerson);
+console.log(youngestPerson);
 
 
 // === TEST YOURSELF ===
